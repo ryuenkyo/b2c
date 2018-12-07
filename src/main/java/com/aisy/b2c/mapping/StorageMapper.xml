@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aisy.b2c.dao.StorageMapper">
+  <resultMap id="BaseResultMap" type="com.aisy.b2c.pojo.Storage">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="storage_id" jdbcType="SMALLINT" property="storageId" />
+    <result column="storage_name" jdbcType="VARCHAR" property="storageName" />
+    <result column="storage_des" jdbcType="VARCHAR" property="storageDes" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />
+  </resultMap>
+  
+  <resultMap id="vStorageResult" type="com.aisy.b2c.pojo.VStorageSUser">
+    <id column="storage_id" jdbcType="SMALLINT" property="storageId" />
+    <result column="storage_name" jdbcType="VARCHAR" property="storageName" />
+    <result column="storage_des" jdbcType="VARCHAR" property="storageDes" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="emnu_value" jdbcType="BIT" property="statusName" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />
+    <result column="cu_name" jdbcType="VARCHAR" property="cuName" />
+    
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    storage_id, storage_name, storage_des, status, cu, ct, uu, ut
+  </sql>
+  
+  <sql id="selectCountStart">
+  	COUNT(
+  </sql>
+  <sql id="selectCountEnd">
+  	)
+  </sql>
+  
+  <sql id="sqlselectStorage">
+ 	s.storage_id,
+	s.storage_name as storageName,
+	s.storage_des as storageDes,
+	s.status as status,
+	e.emnu_value as statusName,
+	s.sort_index as sortIndex,
+	su.user_name as cuName,
+	s.ct
+  </sql>
+  
+  <select id="selectCountStorageWithName" resultType="java.lang.Integer">
+	SELECT
+  		COUNT(*)
+	FROM storage
+  	WHERE 1 = 1
+	<if test="storageName != null and storageName != ''">
+		AND storage_name LIKE CONCAT('%',#{storageName},'%') 
+	</if>
+  	;
+  </select>
+
+ <select id="selectStorageWithName" resultMap="vStorageResult">
+	SELECT
+		<include refid="sqlselectStorage"></include>
+	FROM storage as s
+	LEFT JOIN s_user as su
+	ON su.user_id = s.cu
+	LEFT JOIN emnu as e
+	ON e.emnu_name = s.status
+  	WHERE 1 = 1
+	<if test="storageName != null and storageName != ''">
+		AND storage_name LIKE CONCAT('%',#{storageName},'%') 
+	</if>
+		LIMIT #{page}, #{limit};
+  </select>
+</mapper>

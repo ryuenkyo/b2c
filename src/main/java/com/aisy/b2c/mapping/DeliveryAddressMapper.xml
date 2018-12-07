@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aisy.b2c.dao.DeliveryAddressMapper">
+  <resultMap id="BaseResultMap" type="com.aisy.b2c.pojo.DeliveryAddress">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="address_id" jdbcType="SMALLINT" property="addressId" />
+    <result column="client_id" jdbcType="SMALLINT" property="clientId" />
+    <result column="recive_name" jdbcType="VARCHAR" property="reciveName" />
+    <result column="telphone" jdbcType="VARCHAR" property="telphone" />
+    <result column="telphone_backup" jdbcType="VARCHAR" property="telphoneBackup" />
+    <result column="p_code" jdbcType="SMALLINT" property="pCode" />
+    <result column="c_code" jdbcType="SMALLINT" property="cCode" />
+    <result column="a_code" jdbcType="SMALLINT" property="aCode" />
+    <result column="street" jdbcType="VARCHAR" property="street" />
+    <result column="zip_code" jdbcType="VARCHAR" property="zipCode" />
+    <result column="is_default" jdbcType="BIT" property="isDefault" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    address_id, client_id, recive_name, telphone, telphone_backup, p_code, c_code, a_code, 
+    street, zip_code, is_default, cu, ct, uu, ut
+  </sql>
+</mapper>

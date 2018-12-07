@@ -1,0 +1,50 @@
+[
+	{
+		"permissionId": 0,
+		"permissionName": "请选择父级权限"
+	},
+	{
+		"permissionId": 1,
+		"permissionName": "系统设置",
+		"permissionType": "MENU",
+		"permissionContext": "",
+		"cu": 0,
+		"cuName": "zhang",
+		"ct": "2018-03-20 14:00:50",
+		"parentId": 0,
+		"parentName": "无"
+	},
+	{
+		"permissionId": 2,
+		"permissionName": "商品模块",
+		"permissionType": "MENU",
+		"permissionContext": "",
+		"cu": 0,
+		"cuName": "zhang",
+		"ct": "2018-03-20 14:00:50",
+		"parentId": 0,
+		"parentName": "无"
+	},
+	{
+		"permissionId": 3,
+		"permissionName": "会员模块",
+		"permissionType": "MENU",
+		"permissionContext": "",
+		"cu": 0,
+		"cuName": "zhang",
+		"ct": "2018-03-20 14:00:50",
+		"parentId": 0,
+		"parentName": "无"
+	},
+	{
+		"permissionId": 4,
+		"permissionName": "订单模块",
+		"permissionType": "MENU",
+		"permissionContext": "",
+		"cu": 0,
+		"cuName": "zhang",
+		"ct": "2018-03-20 14:00:50",
+		"parentId": 0,
+		"parentName": "无"
+	}
+]

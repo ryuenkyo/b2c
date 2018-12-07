@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aisy.b2c.dao.SPermissionMapper">
+  <resultMap id="BaseResultMap" type="com.aisy.b2c.pojo.SPermission">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="permission_id" jdbcType="SMALLINT" property="permissionId" />
+    <result column="permission_name" jdbcType="VARCHAR" property="permissionName" />
+    <result column="permission_type" jdbcType="VARCHAR" property="permissionType" />
+    <result column="permission_context" jdbcType="VARCHAR" property="permissionContext" />
+    <result column="parent_id" jdbcType="SMALLINT" property="parentId" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />
+  </resultMap>
+  
+  <resultMap id="vSPermissionResult" type="com.aisy.b2c.pojo.VSPermission">
+ 
+    <id column="permission_id" jdbcType="SMALLINT" property="permissionId" />
+    <result column="permission_name" jdbcType="VARCHAR" property="permissionName" />
+    <result column="permission_type" jdbcType="VARCHAR" property="permissionType" />
+    <result column="permission_context" jdbcType="VARCHAR" property="permissionContext" />
+    <result column="parent_id" jdbcType="SMALLINT" property="parentId" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />
+    <result column="cu_name" jdbcType="VARCHAR" property="cuName"/>
+    <result column="parent_name" jdbcType="VARCHAR" property="parentName"/>
+  </resultMap>
+  
+  
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    permission_id, permission_name, permission_type, permission_context, parent_id, cu, 
+    ct, uu, ut
+  </sql>
+  
+  <select id="selectPermissionDataWithCuName" parameterType="Map" resultMap="vSPermissionResult">
+  	SELECT 
+		sp.permission_id,
+		sp.permission_name,
+		sp.permission_type,
+		sp.permission_context,
+		sp.parent_id,
+		spp.permission_name as parent_name,
+		sp.cu,
+		sp.ct,
+		su.user_name as cu_name
+	FROM s_permission as sp
+	LEFT JOIN s_permission as spp on sp.parent_id = spp.permission_id
+	LEFT JOIN s_user as su on sp.cu = su.user_id
+	LIMIT #{page}, #{limit};
+  </select>
+  
+  
+</mapper>

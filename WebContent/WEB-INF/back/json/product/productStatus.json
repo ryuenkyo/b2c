@@ -1,0 +1,15 @@
+[
+	{
+		"type": "",
+		"name": "请选择状态",
+		"selected": true
+	},
+	{
+		"type": "ACTIVATE",
+		"name": "已激活"
+	},
+	{
+		"type": "INACTIVATE",
+		"name": "已冻结"
+	}
+]

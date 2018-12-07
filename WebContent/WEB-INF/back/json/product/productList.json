@@ -1,0 +1,31 @@
+{
+	"records": [
+		{
+			"productId": 1,
+			"productName": "风衣男士2018春秋季新款韩版潮流港风学生中长款宽松帅气男装外套",
+			"brandId": 1,
+			"brandName": "小哥哥",
+			"showPrice": 134,
+			"status": "ACTIVATE",
+			"statusName": "已激活",
+			"salesVolume": 10,
+			"categoryId": 14,
+			"categoryName": "前卫",
+			"ct": "2018-05-31 13:30:00"
+		},
+		{
+			"productId": 2,
+			"productName": "风衣女士2018春秋季新款韩版潮流港风学生中长款宽松帅气女装外套",
+			"brandId": 1,
+			"brandName": "小哥哥",
+			"showPrice": 134,
+			"status": "INACTIVATE",
+			"statusName": "已冻结",
+			"salesVolume": 1000,
+			"categoryId": 14,
+			"categoryName": "前卫",
+			"ct": "2018-05-31 14:30:00"
+		}
+	],
+	"total": 17
+}

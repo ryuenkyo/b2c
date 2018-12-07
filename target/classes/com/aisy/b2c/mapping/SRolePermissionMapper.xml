@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aisy.b2c.dao.SRolePermissionMapper">
+  <resultMap id="BaseResultMap" type="com.aisy.b2c.pojo.SRolePermission">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="role_id" jdbcType="SMALLINT" property="roleId" />
+    <id column="permission_id" jdbcType="SMALLINT" property="permissionId" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    role_id, permission_id, cu, ct, uu, ut
+  </sql>
+</mapper>

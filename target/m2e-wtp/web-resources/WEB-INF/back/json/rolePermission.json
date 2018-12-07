@@ -1,0 +1,122 @@
+[
+	{
+		"permissionId": 1,
+		"permissionName": "系统设置",
+		"permissionType": "MENU",
+		"permissionContext": "",
+		"parentId": 0,
+		"children": [
+			{
+				"permissionId": 11,
+				"permissionName": "用户管理",
+				"permissionType": "MENU",
+				"permissionContext": "user/user_list",
+				"parentId": 1
+			},
+			{
+				"permissionId": 12,
+				"permissionName": "角色管理",
+				"permissionType": "MENU",
+				"permissionContext": "role/role_list",
+				"parentId": 1
+			},
+			{
+				"permissionId": 13,
+				"permissionName": "权限管理",
+				"permissionType": "MENU",
+				"permissionContext": "permission/permission_list",
+				"parentId": 1
+			}
+		]
+	},
+	{
+		"permissionId": 2,
+		"permissionName": "商品模块",
+		"permissionType": "MENU",
+		"permissionContext": "",
+		"parentId": 0,
+		"children": [
+			{
+				"permissionId": 21,
+				"permissionName": "商品管理",
+				"permissionType": "MENU",
+				"permissionContext": "product/product_list",
+				"parentId": 2
+			},
+			{
+				"permissionId": 22,
+				"permissionName": "分类管理",
+				"permissionType": "MENU",
+				"permissionContext": "category/category_list",
+				"parentId": 2
+			},
+			{
+				"permissionId": 23,
+				"permissionName": "属性管理",
+				"permissionType": "MENU",
+				"permissionContext": "attr/attr_list",
+				"parentId": 2
+			},
+			{
+				"permissionId": 24,
+				"permissionName": "品牌管理",
+				"permissionType": "MENU",
+				"permissionContext": "brand/brand_list",
+				"parentId": 2
+			}
+		]
+	},
+	{
+		"permissionId": 3,
+		"permissionName": "会员模块",
+		"permissionType": "MENU",
+		"permissionContext": "",
+		"parentId": 0,
+		"children": [
+			{
+				"permissionId": 31,
+				"permissionName": "会员管理",
+				"permissionType": "MENU",
+				"permissionContext": "client/client_list",
+				"parentId": 3
+			},
+			{
+				"permissionId": 32,
+				"permissionName": "等级管理",
+				"permissionType": "MENU",
+				"permissionContext": "client/level_list",
+				"parentId": 3
+			},
+			{
+				"permissionId": 33,
+				"permissionName": "积分管理",
+				"permissionType": "MENU",
+				"permissionContext": "client/point_list",
+				"parentId": 3
+			},
+			{
+				"permissionId": 34,
+				"permissionName": "推荐管理",
+				"permissionType": "MENU",
+				"permissionContext": "client/referral_list",
+				"parentId": 3
+			}
+		]
+	},
+	{
+		"permissionId": 4,
+		"permissionName": "订单模块",
+		"permissionType": "MENU",
+		"permissionContext": "",
+		"parentId": 0,
+		"children": [
+			{
+				"permissionId": 41,
+				"permissionName": "订单管理",
+				"permissionType": "MENU",
+				"permissionContext": "order/order_list",
+				"parentId": 4
+			}
+		]
+	}
+]

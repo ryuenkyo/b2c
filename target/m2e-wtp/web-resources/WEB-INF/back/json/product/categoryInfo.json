@@ -1,0 +1,200 @@
+{
+	"categoryInfo": {
+		"1": {
+			"categoryId": 1,
+			"pCategoryId": 0,
+			"categoryName": "商务",
+			"categoryLevel": 1,
+			"status": "ACTIVATE",
+			"statusName": "已激活 ",
+			"sortIndex": 1
+		},
+		"2": {
+			"categoryId": 2,
+			"pCategoryId": 0,
+			"categoryName": "运动",
+			"categoryLevel": 1,
+			"status": "ACTIVATE",
+			"statusName": "已激活 ",
+			"sortIndex": 2
+		},
+		"3": {
+			"categoryId": 3,
+			"pCategoryId": 0,
+			"categoryName": "休闲",
+			"categoryLevel": 1,
+			"status": "ACTIVATE",
+			"statusName": "已激活 ",
+			"sortIndex": 3
+		},
+		"4": {
+			"categoryId": 4,
+			"pCategoryId": 1,
+			"categoryName": "正装",
+			"categoryLevel": 2,
+			"status": "ACTIVATE",
+			"statusName": "已激活 ",
+			"sortIndex": 4
+		},
+		"5": {
+			"categoryId": 5,
+			"pCategoryId": 1,
+			"categoryName": "商务休闲装",
+			"categoryLevel": 2,
+			"status": "ACTIVATE",
+			"statusName": "已激活 ",
+			"sortIndex": 5
+		},
+		"6": {
+			"categoryId": 6,
+			"pCategoryId": 4,
+			"categoryName": "西装",
+			"categoryLevel": 3,
+			"status": "ACTIVATE",
+			"statusName": "已激活 ",
+			"sortIndex": 6
+		},
+		"7": {
+			"categoryId": 7,
+			"pCategoryId": 4,
+			"categoryName": "中山装",
+			"categoryLevel": 3,
+			"status": "ACTIVATE",
+			"statusName": "已激活 ",
+			"sortIndex": 7
+		},
+		"8": {
+			"categoryId": 8,
+			"pCategoryId": 4,
+			"categoryName": "礼服",
+			"categoryLevel": 3,
+			"status": "ACTIVATE",
+			"statusName": "已激活 ",
+			"sortIndex": 8
+		},
+		"9": {
+			"categoryId": 9,
+			"pCategoryId": 5,
+			"categoryName": "休闲西装",
+			"categoryLevel": 3,
+			"status": "ACTIVATE",
+			"statusName": "已激活 ",
+			"sortIndex": 9
+		},
+		"10": {
+			"categoryId": 10,
+			"pCategoryId": 5,
+			"categoryName": "夹克",
+			"categoryLevel": 3,
+			"status": "ACTIVATE",
+			"statusName": "已激活 ",
+			"sortIndex": 10
+		},
+		"11": {
+			"categoryId": 11,
+			"pCategoryId": 5,
+			"categoryName": "卫裤",
+			"categoryLevel": 3,
+			"status": "ACTIVATE",
+			"statusName": "已激活 ",
+			"sortIndex": 11
+		},
+		"12": {
+			"categoryId": 12,
+			"pCategoryId": 3,
+			"categoryName": "居家",
+			"categoryLevel": 2,
+			"status": "ACTIVATE",
+			"statusName": "已激活 ",
+			"sortIndex": 12
+		},
+		
+		"13": {
+			"categoryId": 13,
+			"pCategoryId": 3,
+			"categoryName": "户外",
+			"categoryLevel": 2,
+			"status": "ACTIVATE",
+			"statusName": "已激活 ",
+			"sortIndex": 13
+		},
+		"14": {
+			"categoryId": 14,
+			"pCategoryId": 3,
+			"categoryName": "前卫",
+			"categoryLevel": 2,
+			"status": "ACTIVATE",
+			"statusName": "已激活 ",
+			"sortIndex": 14
+		},
+		"15": {
+			"categoryId": 15,
+			"pCategoryId": 3,
+			"categoryName": "古典",
+			"categoryLevel": 2,
+			"status": "ACTIVATE",
+			"statusName": "已激活 ",
+			"sortIndex": 15
+		},
+		"16": {
+			"categoryId": 16,
+			"pCategoryId": 13,
+			"categoryName": "冲锋衣",
+			"categoryLevel": 3,
+			"status": "ACTIVATE",
+			"statusName": "已激活 ",
+			"sortIndex": 16
+		},
+		"17": {
+			"categoryId": 17,
+			"pCategoryId": 13,
+			"categoryName": "卫裤",
+			"categoryLevel": 3,
+			"status": "ACTIVATE",
+			"statusName": "已激活 ",
+			"sortIndex": 17
+		}
+	},
+	
+	"children": {
+		"1": [4, 5],
+		"2": [],
+		"3": [12, 13, 14, 15],
+		"4": [6, 7, 8],
+		"5": [9, 10, 11],
+		"6": [],
+		"7": [],
+		"8": [],
+		"9": [],
+		"10": [],
+		"11": [],
+		"12": [],
+		"13": [16, 17],
+		"14": [],
+		"15": [],
+		"16": [],
+		"17": []
+	},
+	
+	"categoryAttrInfo": {
+		"1": [1, 2],
+		"2": [1, 2],
+		"3": [1, 2],
+		"4": [3, 4, 5],
+		"5": [9, 10, 11],
+		"6": [8],
+		"7": [6, 7],
+		"8": [],
+		"9": [],
+		"10": [],
+		"11": [],
+		"12": [],
+		"13": [],
+		"14": [],
+		"15": [],
+		"16": [],
+		"17": []
+	},
+	
+	"levelOne": [1, 2, 3]
+}

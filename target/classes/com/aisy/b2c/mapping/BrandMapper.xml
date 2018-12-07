@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aisy.b2c.dao.BrandMapper">
+  <resultMap id="BaseResultMap" type="com.aisy.b2c.pojo.Brand">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="brand_id" jdbcType="SMALLINT" property="brandId" />
+    <result column="brand_name" jdbcType="VARCHAR" property="brandName" />
+    <result column="des" jdbcType="VARCHAR" property="des" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    brand_id, brand_name, des, cu, ct, uu, ut
+  </sql>
+  
+  <resultMap id="sqlBrandWithCuName" type="com.aisy.b2c.pojo.VBrand">
+    <id column="brand_id" jdbcType="SMALLINT" property="brandId" />
+    <result column="brand_name" jdbcType="VARCHAR" property="brandName" />
+    <result column="des" jdbcType="VARCHAR" property="des" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />
+    <result column="cuName" jdbcType="VARCHAR" property="cuName" />
+  </resultMap>
+  
+  <sql id="sqlselectBrandWithCuName">
+ 	b.brand_id,
+	b.brand_name,
+	b.des,
+	su.user_name as cuName,
+	b.ct
+  </sql>
+
+ <select id="selectBrandWithCuName" resultMap="sqlBrandWithCuName">
+	SELECT
+		<include refid="sqlselectBrandWithCuName"></include>
+	FROM brand as b
+	LEFT JOIN s_user as su on su.user_id = b.cu
+  	WHERE 1 = 1
+	<if test="brandName != null and brandName != ''">
+		AND b.brand_name LIKE CONCAT('%',#{brandName},'%') 
+	</if>
+  	LIMIT #{page}, #{limit};
+  </select>
+</mapper>

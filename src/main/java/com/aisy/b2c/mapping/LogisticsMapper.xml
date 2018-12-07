@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aisy.b2c.dao.LogisticsMapper">
+  <resultMap id="BaseResultMap" type="com.aisy.b2c.pojo.Logistics">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="logistics_id" jdbcType="SMALLINT" property="logisticsId" />
+    <id column="logistics_name" jdbcType="VARCHAR" property="logisticsName" />
+    <result column="image_url" jdbcType="VARCHAR" property="imageUrl" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    logistics_id, logistics_name, image_url, cu, ct, uu, ut
+  </sql>
+</mapper>

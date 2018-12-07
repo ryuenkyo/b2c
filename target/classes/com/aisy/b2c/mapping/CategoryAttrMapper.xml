@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aisy.b2c.dao.CategoryAttrMapper">
+  <resultMap id="BaseResultMap" type="com.aisy.b2c.pojo.CategoryAttr">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="category_id" jdbcType="SMALLINT" property="categoryId" />
+    <id column="p_attr_name_id" jdbcType="SMALLINT" property="pAttrNameId" />
+  </resultMap>
+</mapper>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aisy.b2c.dao.AdvertisementImageMapper">
+  <resultMap id="BaseResultMap" type="com.aisy.b2c.pojo.AdvertisementImage">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="advertisement_id" jdbcType="SMALLINT" property="advertisementId" />
+    <id column="advertisement_url" jdbcType="VARCHAR" property="advertisementUrl" />
+    <result column="ad_img_url" jdbcType="VARCHAR" property="adImgUrl" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    advertisement_id, advertisement_url, ad_img_url, cu, ct, uu, ut
+  </sql>
+
+  <resultMap id="VAdvertisementImage" type="com.aisy.b2c.pojo.VAdvertisementImage">
+    <id column="advertisement_id" jdbcType="SMALLINT" property="advertisementId" />
+    <id column="advertisement_url" jdbcType="VARCHAR" property="advertisementUrl" />
+    <result column="ad_img_url" jdbcType="VARCHAR" property="adImgUrl" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="cuName" jdbcType="VARCHAR" property="cuName" />
+    <result column="uuName" jdbcType="VARCHAR" property="uuName" />
+    <result column="statusName" jdbcType="VARCHAR" property="statusName" />
+  </resultMap>
+  
+  <select id="selectCountAdvertisement" resultType="java.lang.Integer">
+	SELECT
+  		COUNT(*)
+	FROM advertisement_image
+  	WHERE 1 = 1
+	<if test="advertisementUrl != null and advertisementUrl != ''">
+		AND advertisement_url LIKE CONCAT('%',#{advertisementUrl},'%') 
+	</if>
+  	;
+  </select>
+
+ <select id="selectAdvertisement" resultMap="VAdvertisementImage">
+	SELECT 
+	 advertisement_id,
+	 advertisement_url,
+	 ad_img_url,
+	 su.user_name as cuName,
+	 su.user_name as uuName,
+	`status`,
+	 ai.ct,
+	 ai.ut
+	FROM advertisement_image as ai
+	LEFT JOIN s_user as su
+	ON su.user_id = ai.cu
+	<if test="advertisementUrl != null and advertisementUrl != ''">
+		AND advertisement_url LIKE CONCAT('%',#{advertisementUrl},'%') 
+	</if>
+		LIMIT #{page}, #{limit};
+  </select>
+</mapper>

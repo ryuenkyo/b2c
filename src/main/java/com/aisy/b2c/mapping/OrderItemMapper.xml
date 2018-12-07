@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aisy.b2c.dao.OrderItemMapper">
+  <resultMap id="BaseResultMap" type="com.aisy.b2c.pojo.OrderItem">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="order_item_id" jdbcType="SMALLINT" property="orderItemId" />
+    <id column="order_id" jdbcType="SMALLINT" property="orderId" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="sku_collection" jdbcType="VARCHAR" property="skuCollection" />
+    <result column="product_show_price" jdbcType="DECIMAL" property="productShowPrice" />
+    <result column="sku_price" jdbcType="DECIMAL" property="skuPrice" />
+    <result column="sub_total" jdbcType="DECIMAL" property="subTotal" />
+    <result column="number" jdbcType="SMALLINT" property="number" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />
+  </resultMap>
+  
+   <resultMap id="OrderItemResult" type="com.aisy.b2c.pojo.VOrderHeaderItemClientEmnu">
+    <id column="order_id" jdbcType="SMALLINT" property="orderId" />
+    <result column="order_status" jdbcType="VARCHAR" property="orderStatus" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="client_id" jdbcType="SMALLINT" property="clientId" />
+    <result column="client_log" jdbcType="VARCHAR" property="clientLog" />
+    <result column="pay_channel" jdbcType="VARCHAR" property="payChannel" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="pay_order_id" jdbcType="VARCHAR" property="payOrderId" />
+    <result column="order_time" jdbcType="TIMESTAMP" property="orderTime" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="logistics_type" jdbcType="VARCHAR" property="logisticsType" />
+    <result column="logistics_amount" jdbcType="DECIMAL" property="logisticsAmount" />
+    <result column="product_num" jdbcType="SMALLINT" property="productNum" />
+    <result column="product_amount" jdbcType="DECIMAL" property="productAmount" />
+    <result column="send_time" jdbcType="TIMESTAMP" property="sendTime" />
+    <result column="settlement_time" jdbcType="TIMESTAMP" property="settlementTime" />
+    <result column="invoice_type" jdbcType="VARCHAR" property="invoiceType" />
+    <result column="invoice_id" jdbcType="SMALLINT" property="invoiceId" />
+    <result column="flag" jdbcType="SMALLINT" property="flag" />
+    <result column="invoice_amount" jdbcType="DECIMAL" property="invoiceAmount" />
+    <result column="promotion_amount" jdbcType="DECIMAL" property="promotionAmount" />
+    <result column="sku_name" jdbcType="VARCHAR" property="skuName" />
+    <result column="product_show_price" jdbcType="DECIMAL" property="productShowPrice" />
+    <result column="sku_price" jdbcType="DECIMAL" property="skuPrice" />
+    <result column="sub_total" jdbcType="DECIMAL" property="subTotal" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="sku_collecton" jdbcType="VARCHAR" property="skuCollection" />
+    <result column="client_name" jdbcType="VARCHAR" property="clientName" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    order_item_id, order_id, product_name, product_show_price, sku_price, sku_collection, 
+    sub_total, number, remark, cu, ct, uu, ut
+  </sql>
+  <sql id="orderItemFrom">
+	  FROM order_item as i
+	  	LEFT JOIN order_header as h
+	  	ON h.order_id = i.order_id
+	  	LEFT JOIN client as c
+	  	ON h.client_id = c.client_id
+	  	WHERE 1 = 1
+   </sql>
+   
+   
+  <sql id="orderItemNeed">
+   	h.order_id as orderId,
+	h.client_id as clientId,
+	client_log,
+	h.order_time as orderTime,
+	h.order_status as orderStatus,
+	h.address as address,
+	h.pay_channel as payChannel,
+	h.pay_order_id as payOrderId,
+	h.pay_time as payTime,
+	h.logistics_type as logisticsType,
+	h.logistics_amount as logisticsAmount,
+	h.send_time as sendTime,
+	h.settlement_time as settlementTime,
+	h.flag as flag,
+	i.product_name as productName,
+	i.product_show_price as productShowPrice,
+	i.sku_price as skuPrice,
+	i.sub_total as subTotal,
+	i.number as number,
+	i.sku_collection as skuCollection,
+	i.ct as ct ,
+	i.remark as remark ,
+	c.client_name as clientName
+   </sql>
+   
+   <sql id="OrderItemWithHeader">
+     <if test="orderId != null and orderId != ''" >
+	 	AND
+		h.order_id  = #{orderId}
+	 </if>
+   </sql>
+    
+    <select id="selectOrderHeaderByorderId" parameterType="Map" resultMap="OrderItemResult">
+  	SELECT
+  	   <include refid="orderItemNeed"></include>
+  	   <include refid="orderItemFrom"></include>
+  	   <include refid="OrderItemWithHeader"></include>
+    </select>
+   
+</mapper>

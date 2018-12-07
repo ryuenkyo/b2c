@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aisy.b2c.dao.OrderHeaderMapper">
+  <resultMap id="BaseResultMap" type="com.aisy.b2c.pojo.OrderHeader">
+    <id column="order_id" jdbcType="SMALLINT" property="orderId" />
+    <result column="order_status" jdbcType="VARCHAR" property="orderStatus" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="client_id" jdbcType="SMALLINT" property="clientId" />
+    <result column="client_log" jdbcType="VARCHAR" property="clientLog" />
+    <result column="pay_channel" jdbcType="VARCHAR" property="payChannel" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="pay_order_id" jdbcType="VARCHAR" property="payOrderId" />
+    <result column="order_time" jdbcType="TIMESTAMP" property="orderTime" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="logistics_type" jdbcType="VARCHAR" property="logisticsType" />
+    <result column="logistics_amount" jdbcType="DECIMAL" property="logisticsAmount" />
+    <result column="product_num" jdbcType="SMALLINT" property="productNum" />
+    <result column="product_amount" jdbcType="DECIMAL" property="productAmount" />
+    <result column="send_time" jdbcType="TIMESTAMP" property="sendTime" />
+    <result column="settlement_time" jdbcType="TIMESTAMP" property="settlementTime" />
+    <result column="invoice_type" jdbcType="VARCHAR" property="invoiceType" />
+    <result column="invoice_id" jdbcType="SMALLINT" property="invoiceId" />
+    <result column="invoice_amount" jdbcType="DECIMAL" property="invoiceAmount" />
+    <result column="promotion_amount" jdbcType="DECIMAL" property="promotionAmount" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="flag" jdbcType="SMALLINT" property="flag" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />
+    
+    <result column="client_name" jdbcType="VARCHAR" property="clientName" />
+     <result column="tel" jdbcType="VARCHAR" property="tel" />
+    
+  </resultMap>
+  <resultMap id="OrderHeaderResultMap" type="com.aisy.b2c.pojo.VOrderHeader">
+    <id column="order_id" jdbcType="SMALLINT" property="orderId" />
+    <result column="order_status" jdbcType="VARCHAR" property="orderStatus" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="client_id" jdbcType="SMALLINT" property="clientId" />
+    <result column="client_log" jdbcType="VARCHAR" property="clientLog" />
+    <result column="pay_channel" jdbcType="VARCHAR" property="payChannel" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="pay_order_id" jdbcType="VARCHAR" property="payOrderId" />
+    <result column="order_time" jdbcType="TIMESTAMP" property="orderTime" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="logistics_type" jdbcType="VARCHAR" property="logisticsType" />
+    <result column="logistics_amount" jdbcType="DECIMAL" property="logisticsAmount" />
+    <result column="product_num" jdbcType="SMALLINT" property="productNum" />
+    <result column="product_amount" jdbcType="DECIMAL" property="productAmount" />
+    <result column="send_time" jdbcType="TIMESTAMP" property="sendTime" />
+    <result column="settlement_time" jdbcType="TIMESTAMP" property="settlementTime" />
+    <result column="invoice_type" jdbcType="VARCHAR" property="invoiceType" />
+    <result column="invoice_id" jdbcType="SMALLINT" property="invoiceId" />
+    <result column="invoice_amount" jdbcType="DECIMAL" property="invoiceAmount" />
+    <result column="promotion_amount" jdbcType="DECIMAL" property="promotionAmount" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />  
+     <result column="client_name" jdbcType="VARCHAR" property="clientName" />
+     <result column="tel" jdbcType="VARCHAR" property="tel" />
+    
+    
+    
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_id, order_status, amount, client_id, client_log, pay_channel, pay_time, pay_order_id, 
+    order_time, address, logistics_type, logistics_amount, product_num, product_amount, 
+    send_time, settlement_time, invoice_type, invoice_id, invoice_amount, promotion_amount, 
+    cu, ct, uu, ut,flag,client_name,tel
+  </sql>
+
+  <sql id="OrderHeader">
+    order_id, 
+    order_status, 
+    amount, 
+    client_id, 
+    client_log, 
+    pay_channel, 
+    pay_time, 
+    pay_order_id, 
+    order_time, 
+    address, 
+    logistics_type, 
+    logistics_amount, 
+    product_num, 
+    product_amount, 
+    send_time, 
+    settlement_time, 
+    invoice_type, 
+    invoice_id, 
+    flag,
+    invoice_amount, 
+    promotion_amount, 
+    client_Name as clientName   
+  </sql>
+  <sql id="OrderHeaderSearchbackground">
+    FROM order_header 
+    WHERE 1=1
+  </sql>
+  
+   <sql id="selectOrderHeaderSearch">
+    
+   <if test="clientName != null and clientName != ''">
+	 	AND
+		client_name LIKE CONCAT('%',#{clientName},'%')
+   </if>
+	 
+	
+
+    </sql>
+     
+  <sql id="selectOrderHeader">
+    SELECT
+  		<include refid="OrderHeader"></include>
+  	FROM order_header 
+  	WHERE 1 = 1
+  </sql>
+  
+  <sql id="selectCountStart">
+  	COUNT(
+  </sql>
+  
+  <sql id="selectCountEnd">
+  	)
+  </sql> 
+   
+ <select id="selectOrderHeaderByCount" parameterType="Map" resultType="java.lang.Integer">
+   SELECT
+      <include refid="selectCountStart"></include>*<include refid="selectCountEnd"></include>
+      <include refid="OrderHeaderSearchbackground"></include>
+      <include refid="selectOrderHeaderSearch"></include>
+ 	
+ </select>
+ 
+  <select id="selectOrderHeaderByStatusAll" parameterType="Map" resultMap="OrderHeaderResultMap">
+   SELECT
+     <include refid="OrderHeader"></include>
+     <include refid="OrderHeaderSearchbackground"></include>
+     <include refid="selectOrderHeaderSearch"></include>
+   LIMIT #{page}, #{limit};
+  </select>
+  
+  <select id="selectSumAmountOrderHeader" parameterType="Map" resultType="java.lang.Integer">
+  	SELECT
+	SUM(amount)
+	FROM
+	order_header
+  </select>
+  
+  <select id="selectCountOrderHeader" parameterType="Map" resultType="java.lang.Integer">
+  	SELECT
+      <include refid="selectCountStart"></include>*<include refid="selectCountEnd"></include>
+	FROM
+	order_header
+  </select>
+  
+</mapper>

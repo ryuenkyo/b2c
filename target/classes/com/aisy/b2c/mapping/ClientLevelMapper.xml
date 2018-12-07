@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aisy.b2c.dao.ClientLevelMapper">
+  <resultMap id="BaseResultMap" type="com.aisy.b2c.pojo.ClientLevel">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="level" jdbcType="SMALLINT" property="level" />
+    <result column="level_name" jdbcType="VARCHAR" property="levelName" />
+    <result column="level_point" jdbcType="INTEGER" property="levelPoint" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    level, level_name, level_point, cu, ct, uu, ut
+  </sql>
+  <select id="selectLeveOderBy" parameterType="Map" resultMap="BaseResultMap">
+  SELECT
+	LEVEL,
+	level_name,
+	level_point,
+	cu,
+	ct,
+	uu,
+	ut
+ FROM
+	client_level
+ ORDER BY
+	level ASC
+  </select>
+</mapper>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aisy.b2c.dao.SUserMapper">
+  <resultMap id="BaseResultMap" type="com.aisy.b2c.pojo.SUser">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="user_id" jdbcType="SMALLINT" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />
+  </resultMap>
+  
+  <resultMap id="vUserRoleResult" type="com.aisy.b2c.pojo.VUserRole">
+    <result column="user_id" jdbcType="SMALLINT" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="cu_name" jdbcType="VARCHAR" property="cuName" />
+    <result column="role_id" jdbcType="SMALLINT" property="roleId" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+  </resultMap>
+  
+  
+  <sql id="selectCountStart">
+  	COUNT(
+  </sql>
+  <sql id="selectCountEnd">
+  	)
+  </sql>
+  <sql id="userInfoWithRoleCol">
+  	su.user_id AS user_id,
+	su.user_name AS user_name,
+	su.nick_name AS nick_name,
+	su.cu AS cu,
+	su.ct AS ct,
+	suback.user_name AS cuName,
+	sur.role_id AS role_id,
+	sr.role_name AS role_name
+  </sql>
+  
+  <sql id="selectUserInfoWithRoleSql">
+  	SELECT
+		<include refid="userInfoWithRoleCol"></include>
+	FROM s_user as su
+	LEFT JOIN s_user_role as sur ON su.user_id = sur.user_id
+	LEFT JOIN s_role as sr ON sur.role_id = sr.role_id
+	LEFT JOIN s_user suback ON su.cu = suback.user_id
+  </sql>
+  
+  <sql id="selectUserInfoWithRoleCountSql">
+  	SELECT
+  		<include refid="selectCountStart"></include>*<include refid="selectCountEnd"></include>
+	FROM s_user as su
+	LEFT JOIN s_user_role as sur ON su.user_id = sur.user_id
+	LEFT JOIN s_role as sr ON sur.role_id = sr.role_id
+	LEFT JOIN s_user suback ON su.cu = suback.user_id
+  </sql>
+  
+  <select id="selectCountUserInfoWithRole" parameterType="Map" resultType="java.lang.Integer">
+  	<include refid="selectUserInfoWithRoleCountSql"></include>
+	WHERE 1 = 1
+	<if test="userName != null and userName != ''">
+		AND su.user_name LIKE CONCAT('%',#{userName},'%')
+	</if>
+	<if test="nickName != null and nickName != ''">
+		AND su.nick_name LIKE CONCAT('%',#{nickName},'%')
+	</if>
+	<if test="roleId != null and roleId != ''">
+		AND sur.role_id = #{roleId}
+	</if>
+	ORDER BY sur.user_id;
+  </select>
+  
+  <select id="selectUserInfoWithRole" parameterType="Map" resultMap="vUserRoleResult">
+  	<include refid="selectUserInfoWithRoleSql"></include>
+	WHERE 1 = 1
+	<if test="userName != null and userName != ''">
+		AND su.user_name LIKE CONCAT('%',#{userName},'%')
+	</if>
+	<if test="nickName != null and nickName != ''">
+		AND su.nick_name LIKE CONCAT('%',#{nickName},'%')
+	</if>
+	<if test="roleId != null and roleId != ''">
+		AND sur.role_id = #{roleId}
+	</if>
+	ORDER BY sur.user_id
+	LIMIT #{page}, #{limit};
+	
+  </select>
+  
+  
+  
+  
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    user_id, user_name, password, nick_name, cu, ct, uu, ut
+  </sql>
+</mapper>

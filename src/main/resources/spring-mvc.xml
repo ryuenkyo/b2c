@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"  
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xmlns:mvc="http://www.springframework.org/schema/mvc"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans    
+                        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd    
+                        http://www.springframework.org/schema/context    
+                        http://www.springframework.org/schema/context/spring-context-4.0.xsd    
+                        http://www.springframework.org/schema/mvc    
+                        http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">  
+    <!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
+    <context:component-scan base-package="com.aisy.b2c.controller">
+    	<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    
+    <!-- 自动扫描该异常处理增强包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
+    <context:component-scan base-package="com.aisy.b2c.aop.controller">
+    	<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+    </context:component-scan>
+    
+    <!-- 能够让controller 直接返回json的转换器 -->
+	<bean id="mappingJacksonHttpMessageConverter"  
+        class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">  
+        <property name="supportedMediaTypes">  
+            <list>  
+                <value>text/html;charset=UTF-8</value>  
+		        <value>application/json;charset=UTF-8</value>
+		        <value>application/xml;charset=UTF-8</value>
+		        <value>text/plain;charset=UTF-8</value>
+		        <value>text/xml;charset=UTF-8</value>
+            </list>  
+        </property>  
+    </bean>
+    
+
+    <!--  -->
+    <mvc:annotation-driven>
+		<mvc:message-converters>    
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="supportedMediaTypes">  
+		            <list>  
+		                <value>text/html;charset=UTF-8</value>  
+				        <value>application/json;charset=UTF-8</value>
+				        <value>application/xml;charset=UTF-8</value>
+				        <value>text/plain;charset=UTF-8</value>
+				        <value>text/xml;charset=UTF-8</value> 
+		            </list>  
+		        </property>
+			</bean>    
+		</mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <mvc:resources mapping="/admin/**" location="/WEB-INF/back/" />
+    <mvc:resources mapping="/front/**" location="/WEB-INF/front/" />
+    <!-- 
+    <mvc:resources mapping="/admin/bootstrap/**" location="/WEB-INF/back/bootstrap/" />
+    <mvc:resources mapping="/admin/images/**" location="/WEB-INF/back/images/" />
+    <mvc:resources mapping="/admin/vendors/**" location="/WEB-INF/back/vendors/" />
+	 -->
+	 
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/system/**"/>
+			<mvc:exclude-mapping path="/system/main"/>
+			<bean class="com.aisy.b2c.interceptor.AuthorityInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/front/**"/>
+			<mvc:exclude-mapping path="/front/admin.html"/>			
+			<mvc:exclude-mapping path="/front/getadmin.html"/>
+			<mvc:exclude-mapping path="/front/register.html"/>
+			<mvc:exclude-mapping path="/front/referralCode.html"/>
+			<mvc:exclude-mapping path="/front/inuser.html"/>
+			<mvc:exclude-mapping path="/front/user.html"/>
+			<mvc:exclude-mapping path="/front/code.html"/>
+			<mvc:exclude-mapping path="/front/information.html"/>
+			<mvc:exclude-mapping path="/front/product/searchl/**"/>
+			
+			
+			
+			
+			
+			<mvc:exclude-mapping path="/front/product/search"/>
+			<mvc:exclude-mapping path="/front/product/detail/*"/>
+			<mvc:exclude-mapping path="/front/product/searchInfo"/>			
+			<mvc:exclude-mapping path="/front/product/searchProductInfo"/>
+			<mvc:exclude-mapping path="/**/*.css"/>
+			<mvc:exclude-mapping path="/**/*.map"/>
+			<mvc:exclude-mapping path="/**/*.js"/>
+			<mvc:exclude-mapping path="/**/*.png"/>
+			<mvc:exclude-mapping path="/**/*.jpg"/>
+			<mvc:exclude-mapping path="/**/*.otf"/>
+			<mvc:exclude-mapping path="/**/*.eot"/>
+			<mvc:exclude-mapping path="/**/*.svg"/>
+			<mvc:exclude-mapping path="/**/*.ttf"/>
+			<mvc:exclude-mapping path="/**/*.woff"/>
+			<mvc:exclude-mapping path="/**/*.woff2"/>
+			<bean class="com.aisy.b2c.interceptor.AuthorityFrontInterceptor" />
+		</mvc:interceptor>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</mvc:interceptors>
+
+    <!-- 配置文件上传，如果没有使用文件上传可以不用配置，当然如果不配，那么配置文件中也不必引入上传组件包 -->  
+    <bean id="multipartResolver"    
+        class="com.aisy.b2c.mvc.common.CustomMultipartResolver">    
+        <!-- 默认编码 -->  
+        <property name="defaultEncoding" value="utf-8" />    
+        <!-- 文件大小最大值 -->  
+        <property name="maxUploadSize" value="9999910485760000" />    
+        <!-- 内存中的最大值 -->  
+        <property name="maxInMemorySize" value="40960999" />    
+    </bean>
+    
+    <!-- FreeMarker模板路径 -->
+    <bean id="freeMarkerConfigurer"
+        class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath">
+        	<value>classpath:/templates</value>
+        </property>
+        <property name="freemarkerSettings">
+            <props>
+            	<prop key="defaultEncoding">UTF-8</prop>
+                <prop key="template_update_delay">1</prop>
+                <prop key="locale">zh_CN</prop>
+                <prop key="datetime_format">yyyy-MM-dd</prop><!-- 时间格式化 -->
+                <prop key="date_format">yyyy-MM-dd</prop>
+                <prop key="number_format">#.##</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- 配置freeMarker视图解析器 -->
+    <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="contentType" value="text/html; charset=utf-8" />
+        <property name="allowSessionOverride" value="true" />
+        <property name="allowRequestOverride" value="true" />
+        <property name="exposeSpringMacroHelpers" value="true" />
+        <property name="exposeRequestAttributes" value="true" />
+        <property name="exposeSessionAttributes" value="true" />
+        <property name="requestContextAttribute" value="request" />
+        <property name="suffix" value=".ftl" />
+    </bean>
+    
+    <!-- 上传文件进度监听器 -->
+	<context:component-scan base-package="com.aisy.b2c.mvc.listener">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Component" />
+	</context:component-scan>
+	
+	<bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
+        <property name="config">
+            <bean class="com.google.code.kaptcha.util.Config">
+                <constructor-arg>
+                    <props>
+                        <prop key="kaptcha.border">no</prop>
+                        <prop key="kaptcha.border.color">105,179,90</prop>
+                        <prop key="kaptcha.textproducer.font.color">black</prop>
+                        <prop key="kaptcha.image.width">125</prop>
+                        <prop key="kaptcha.image.height">45</prop>
+                        <prop key="kaptcha.textproducer.font.size">35</prop>
+                	    <prop key="kaptcha.textproducer.char.space">5</prop>  
+                        <prop key="kaptcha.session.key">code</prop>
+                        <prop key="kaptcha.textproducer.char.length">4</prop>
+                        <prop key="kaptcha.obscurificator.impl">com.google.code.kaptcha.impl.ShadowGimpy</prop>
+                        <prop key="kaptcha.textproducer.font.names">宋体,楷体,微软雅黑</prop>
+                    </props>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
+</beans>

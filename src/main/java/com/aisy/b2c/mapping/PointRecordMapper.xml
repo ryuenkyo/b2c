@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aisy.b2c.dao.PointRecordMapper">
+  <resultMap id="BaseResultMap" type="com.aisy.b2c.pojo.PointRecord">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="record_id" jdbcType="SMALLINT" property="recordId" />
+    <result column="client_id" jdbcType="SMALLINT" property="clientId" />
+    <result column="pm_id" jdbcType="SMALLINT" property="pmId" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    record_id, client_id, pm_id, cu, ct, uu, ut
+  </sql>
+</mapper>

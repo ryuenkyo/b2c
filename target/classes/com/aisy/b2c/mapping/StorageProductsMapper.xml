@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aisy.b2c.dao.StorageProductsMapper">
+  <resultMap id="BaseResultMap" type="com.aisy.b2c.pojo.StorageProducts">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="storage_id" jdbcType="SMALLINT" property="storageId" />
+    <id column="product_id" jdbcType="SMALLINT" property="productId" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    storage_id, product_id, cu, ct, uu, ut
+  </sql>
+  
+  <resultMap id="VStorageProdcutDetailMap" type="com.aisy.b2c.pojo.VStorageProdcutDetail">
+    <id column="storage_id" jdbcType="SMALLINT" property="storageId" />
+    <id column="product_id" jdbcType="SMALLINT" property="productId" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="show_price" jdbcType="DECIMAL" property="showPrice" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="sales_volume" jdbcType="INTEGER" property="salesVolume" />
+  </resultMap>
+  
+  <select id="selectStorageProdcutInfoByStorageId" resultMap="VStorageProdcutDetailMap">
+	SELECT
+	sp.storage_id as storageId,
+	sp.product_id as productId,
+	p.product_name as productName,
+	p.show_price,
+	p.sales_volume,
+	sp.sort_index as sortIndex
+	FROM storage_products as sp
+	LEFT JOIN product as p
+	ON p.product_id = sp.product_id
+	WHERE storage_id = #{storageId};
+  </select>
+  <select id="selectStorageProdcutInfoExceptId" resultMap="VStorageProdcutDetailMap">
+	SELECT
+	product_id,
+	product_name,
+	sales_volume,
+	show_price,
+	status
+	FROM product
+	WHERE 1= 1
+  	<if test="productName != null and productName != ''">
+		AND product_name LIKE CONCAT('%',#{productName},'%')
+	</if>
+  	AND product_id not in (SELECT product_id from storage_products WHERE storage_id = #{storageId})
+  	<if test="page != null and page != '' and limit != null and limit != ''" >
+		LIMIT #{page}, #{limit}
+	</if>
+	;
+  </select>
+  <select id="selectSortIndxeInfoByStorageId" parameterType="Map" resultType="java.lang.Integer">
+	SELECT
+	MAX(sort_index)
+	FROM storage_products
+	WHERE storage_id = #{storageId};
+  </select>
+  <select id="selectStorageSortIndxeInfo" parameterType="Map" resultType="java.lang.Integer">
+	SELECT
+	MAX(sort_index)
+	FROM storage;
+  </select>
+  <select id="selectStorageSortIndxeInfoById" parameterType="Map" resultType="java.lang.Integer">
+	SELECT
+	distinct storage_id
+	FROM storage
+	WHERE sort_Index = #{sortIndex};
+  </select>
+</mapper>

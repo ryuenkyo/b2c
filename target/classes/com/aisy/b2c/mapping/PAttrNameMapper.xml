@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aisy.b2c.dao.PAttrNameMapper">
+  <resultMap id="BaseResultMap" type="com.aisy.b2c.pojo.PAttrName">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="p_attr_name_id" jdbcType="SMALLINT" property="pAttrNameId" />
+    <result column="p_attr_name" jdbcType="VARCHAR" property="pAttrName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    p_attr_name_id, p_attr_name
+  </sql>
+</mapper>

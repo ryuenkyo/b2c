@@ -1,0 +1,23 @@
+{
+	"records": [
+		{
+			"userId": 1,
+			"userName": "laocai",
+			"nickName": "老蔡",
+			"roleId": 1,
+			"roleName": "管理员",
+			"cuName": "",
+			"ct": "2018-03-20 13:00:50"
+		},
+		{
+			"userId": 2,
+			"userName": "laozhang",
+			"nickName": "老张",
+			"roleId": 2,
+			"roleName": "订单管理员",
+			"cuName": "老蔡",
+			"ct": "2018-03-20 13:00:52"
+		}
+	],
+	"total": 7
+}

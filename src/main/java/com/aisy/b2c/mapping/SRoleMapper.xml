@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aisy.b2c.dao.SRoleMapper">
+  <resultMap id="BaseResultMap" type="com.aisy.b2c.pojo.SRole">
+    <id column="role_id" jdbcType="SMALLINT" property="roleId" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="role_des" jdbcType="VARCHAR" property="roleDes" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />
+  </resultMap>
+  
+  <resultMap id="vSRoleResult" type="com.aisy.b2c.pojo.VSRole">
+    <id column="role_id" jdbcType="SMALLINT" property="roleId" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="role_des" jdbcType="VARCHAR" property="roleDes" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />
+    <result column="cu_name" jdbcType="VARCHAR" property="cuName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    role_id, role_name, role_des, cu, ct, uu, ut
+  </sql>
+  
+  <sql id="sqlRoleDataWithCuName">
+ 	sr.role_id, 
+	sr.role_name, 
+	sr.role_des, 
+	sr.cu, 
+	sr.ct, 
+	sr.uu, 
+	sr.ut,
+	su.user_name as cu_name
+  </sql>
+  
+  <select id="selectRoleDataWithCuName" parameterType="Map" resultMap="vSRoleResult">
+	SELECT 
+		<include refid="sqlRoleDataWithCuName"></include>
+	FROM 
+		s_role as sr
+	LEFT JOIN s_user as su ON sr.cu = su.user_id
+	WHERE 1 = 1
+	<if test="roleName != null and roleName != ''">
+		AND sr.role_name LIKE CONCAT('%',#{roleName},'%') 
+	</if>
+	ORDER BY sr.role_id
+	LIMIT #{page}, #{limit};
+  </select>
+</mapper>

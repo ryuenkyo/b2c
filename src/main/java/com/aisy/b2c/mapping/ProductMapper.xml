@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aisy.b2c.dao.ProductMapper">
+  <resultMap id="BaseResultMap" type="com.aisy.b2c.pojo.Product">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="product_id" jdbcType="SMALLINT" property="productId" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="show_price" jdbcType="DECIMAL" property="showPrice" />
+    <result column="brand_id" jdbcType="SMALLINT" property="brandId" />
+    <result column="des" jdbcType="VARCHAR" property="des" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="sales_volume" jdbcType="INTEGER" property="salesVolume" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.aisy.b2c.pojo.Product">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="des" jdbcType="LONGVARCHAR" property="des" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    product_id, product_name, show_price, brand_id, status, sales_volume, cu, ct, uu, 
+    ut
+  </sql>
+  <sql id="Blob_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    des
+  </sql>
+      <sql id="selectCountStart">
+  	COUNT(
+  </sql>
+  <sql id="selectCountEnd">
+  	)
+  </sql>
+  <sql id="selectProductSql">
+	SELECT product_id as productId,
+       product_name as productName,
+       show_price as showPrice,
+       brand_id as brandId,
+       des as des,
+       status as status,
+       sales_volume as salesVolume,
+       cu as cu,
+	   ct as ct,
+	   uu as uu,
+	   ut as ut
+  </sql>		       
+  <select id="selectCountProductInfo" parameterType="Map" resultType="java.lang.Integer">
+  	SELECT
+  	<include refid="selectCountStart"></include>*<include refid="selectCountEnd"></include>
+  	 FROM product
+	 WHERE 1 = 1
+	 <if test="products != null">
+		AND product_id in 
+		<foreach item="item" index="index" collection="products" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	 </if>
+	 <if test="productName != null and productName != ''">
+		AND product_name LIKE CONCAT('%',#{productName},'%')
+	 </if>
+	 <if test="status != null and status != ''">
+		AND status = #{status}
+	 </if>
+	 <if test="brandId != null and brandId != ''">
+		AND brand_id = #{brandId}
+	 </if>
+  </select>
+  <select id="selectProductInfo" parameterType="Map" resultMap="BaseResultMap">
+ 	<include refid="selectProductSql"></include>
+    FROM product
+	WHERE 1 = 1
+	<if test="products != null">
+		AND product_id in 
+		<foreach item="item" index="index" collection="products" open="(" separator="," close=")">
+			${item}
+		</foreach>
+	</if>
+	<if test="productName != null and productName != ''">
+		AND product_name LIKE CONCAT('%',#{productName},'%')
+	</if>
+	<if test="status != null and status != ''">
+		AND status = #{status}
+	</if>
+	<if test="brandId != null and brandId != ''">
+		AND brand_id = #{brandId}
+	</if>
+	<if test="sortBy != null and sortBy != '' and direction != null and direction != ''" >
+		ORDER BY ${sortBy} ${direction}
+	</if>
+	<if test="limit != null and limit != ''" >
+		LIMIT ${page}, ${limit}
+	</if>
+	;
+  </select>
+</mapper>

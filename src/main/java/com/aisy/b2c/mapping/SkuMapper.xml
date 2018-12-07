@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aisy.b2c.dao.SkuMapper">
+  <resultMap id="BaseResultMap" type="com.aisy.b2c.pojo.Sku">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="sku_id" jdbcType="SMALLINT" property="skuId" />
+    <result column="product_id" jdbcType="SMALLINT" property="productId" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="stock" jdbcType="INTEGER" property="stock" />
+    <result column="sales_volume" jdbcType="INTEGER" property="salesVolume" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.aisy.b2c.pojo.Sku">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="sku_collection" jdbcType="LONGVARCHAR" property="skuCollection" />
+  </resultMap>
+  
+  <resultMap id="withProductResultMap" type="com.aisy.b2c.pojo.VSku">
+    <id column="sku_id" jdbcType="SMALLINT" property="skuId" />
+    <result column="product_id" jdbcType="SMALLINT" property="productId" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="stock" jdbcType="INTEGER" property="stock" />
+    <result column="sales_volume" jdbcType="INTEGER" property="salesVolume" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="sku_collection" jdbcType="VARCHAR" property="skuCollection" />
+  </resultMap>
+  
+  
+  
+  <sql id="baseColumnList">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    sku_id, product_id, price, stock, sales_volume, cu, ct, uu, ut
+  </sql>
+  <sql id="Blob_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    sku_collection
+  </sql>
+  
+  <sql id="selectCountStart">
+  	COUNT(
+  </sql>
+  <sql id="selectCountEnd">
+  	)
+  </sql>
+  
+  <sql id="selectSkuWithProductSql">
+ 		s.sku_id,
+  		s.product_id,
+  		s.sku_collection,
+  		s.price,
+  		s.stock,
+  		s.sales_volume AS salesVolume,
+  		s.cu,
+  		s.ct,
+  		s.uu,
+  		s.ut,
+  		p.product_name AS productName
+  </sql>
+  
+  <select id="selectSkuWithProductCount" parameterType="Map" resultType="java.lang.Integer">
+  	SELECT 
+  		<include refid="selectCountStart"></include>
+  		*
+  		<include refid="selectCountEnd"></include>
+  	FROM sku AS s
+  	LEFT JOIN product AS p
+  	ON s.product_id = p.product_id
+  	WHERE 1 = 1
+  	<if test="productName != null and productName != ''">
+		AND product_name LIKE CONCAT('%',#{productName},'%')
+	</if>
+	
+	<if test="page != null and page != '' and limit != null and limit != ''" >
+		LIMIT ${page}, ${limit}
+	</if>
+	;
+  </select>
+  
+  <select id="selectSkuWithProductSum" parameterType="Map" resultType="java.lang.Integer">
+  	select 
+  		sum(stock)
+  	from sku
+  	where product_id = #{productId}
+  	;
+  </select>
+
+  <select id="selectSkuWithProduct" parameterType="Map" resultMap="withProductResultMap">
+	SELECT 
+  		<include refid="selectSkuWithProductSql"></include>
+  	FROM sku AS s
+  	LEFT JOIN product AS p
+  	ON s.product_id = p.product_id
+  	WHERE 1 = 1
+  <if test="productName != null and productName != ''">
+		AND product_name LIKE CONCAT('%',#{productName},'%')
+	</if>
+	<if test="sortBy != null and sortBy != '' and direction != null and direction != ''" >
+		ORDER BY ${sortBy} ${direction}
+	</if>
+	<if test="page != null and page != '' and limit != null and limit != ''" >
+		LIMIT ${page}, ${limit}
+	</if>
+  	;
+  </select>
+  
+</mapper>
+  	

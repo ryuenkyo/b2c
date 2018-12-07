@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aisy.b2c.dao.ClientPointMapper">
+  <resultMap id="BaseResultMap" type="com.aisy.b2c.pojo.ClientPoint">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="client_id" jdbcType="SMALLINT" property="clientId" />
+    <result column="point" jdbcType="INTEGER" property="point" />
+    <result column="used_point" jdbcType="INTEGER" property="usedPoint" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    client_id, point, used_point, cu, ct, uu, ut
+  </sql>
+  
+   <resultMap id="baseResultWithClient" type="com.aisy.b2c.pojo.VClientPoint">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="client_id" jdbcType="SMALLINT" property="clientId" />
+    <result column="point" jdbcType="INTEGER" property="point" />
+    <result column="used_point" jdbcType="INTEGER" property="usedPoint" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />
+    <result column="client_name" jdbcType="VARCHAR" property="clientName" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="point_reason" jdbcType="VARCHAR" property="pointReason" />
+    <result column="point" jdbcType="INTEGER" property="point" />
+    <result column="record_id" jdbcType="SMALLINT" property="recordId" />
+  </resultMap>
+  
+  <sql id="selectCountStart">
+  	COUNT(
+  </sql>
+  <sql id="selectCountEnd">
+  	)
+  </sql>
+  <sql id="selectClientPointSql">
+ 	SELECT 
+		cp.client_id,
+		c.client_name as clientName,
+		c.nick_name as nickName,
+		cp.point,
+		cp.used_point,
+		cp.cu,
+		cp.ct,
+		cp.uu,
+		cp.ut
+  </sql>		       
+  <select id="selectCountClientPointInfo" parameterType="Map" resultType="java.lang.Integer">
+  	SELECT
+  	<include refid="selectCountStart"></include>*<include refid="selectCountEnd"></include>
+  	 FROM client_point as cp
+		LEFT JOIN client as c
+		on c.client_id = cp.client_id
+		WHERE 1 = 1
+	 <if test="clientPoints != null and clientPoints != ''">
+		AND CONCAT(`client_name`, `nick_name`) LIKE CONCAT('%',#{clientPoints},'%')
+	 </if>
+  </select>
+  <select id="selectClientPointInfo" parameterType="Map" resultMap="baseResultWithClient">
+  <include refid="selectClientPointSql"></include>
+	FROM client_point as cp
+	LEFT JOIN client as c
+	on c.client_id = cp.client_id
+	WHERE 1 = 1
+	<if test="clientPoints != null and clientPoints != ''">
+		AND CONCAT(`client_name`, `nick_name`) LIKE CONCAT('%',#{clientPoints},'%')
+	</if>
+	<if test="sortBy != null and sortBy != '' and direction != null and direction != ''" >
+		ORDER BY ${sortBy} ${direction}
+	</if>
+	<if test="page != null and limit != null" >
+		LIMIT #{page}, #{limit}
+	</if>
+	;
+  </select>
+  
+  <select id="selectCountClientPointDetailInfo" parameterType="Map" resultType="java.lang.Integer">
+  	SELECT
+  	<include refid="selectCountStart"></include>*<include refid="selectCountEnd"></include>
+	  	FROM point_record as pr
+		LEFT JOIN point_management as pm
+		on pm.pm_id = pr.pm_id
+		LEFT JOIN client as c
+		on c.client_id = pr.client_id
+		WHERE 1 = 1
+	 <if test="clientId != null and clientId != ''" >
+	 	AND pr.client_id = #{clientId}
+	</if>
+ 	;
+  </select>
+  
+  <select id="selectClientPointDetailInfo" parameterType="Map" resultMap="baseResultWithClient">
+ 	SELECT
+		pr.record_id,
+		c.client_name,
+		c.nick_name,
+		pm.point_reason,
+		pm.point,
+		pr.ut
+	FROM point_record as pr
+	LEFT JOIN point_management as pm
+	on pm.pm_id = pr.pm_id
+	LEFT JOIN client as c
+	on c.client_id = pr.client_id
+	WHERE 1 = 1
+	<if test="clientId != null and clientId != ''" >
+	 	AND pr.client_id = #{clientId}
+	</if>
+	<if test="sortBy != null and sortBy != '' and direction != null and direction != ''" >
+		ORDER BY ${sortBy} ${direction}
+	</if>
+	<if test="page != null and limit != null" >
+		LIMIT #{page}, #{limit}
+	</if>
+	;
+  </select>
+</mapper>

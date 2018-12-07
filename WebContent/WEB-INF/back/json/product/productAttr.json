@@ -1,0 +1,204 @@
+{
+	"pAttrNameList": [1, 2, 3, 4, 5, 6, 7, 8],
+	"attrNameMapper": {
+		"1": {
+			"pAttrNameId": "1",
+			"pAttrName": "尺码"
+		},
+		"2": {
+			"pAttrNameId": "2",
+			"pAttrName": "颜色"
+		},
+		"3": {
+			"pAttrNameId": "3",
+			"pAttrName": "面料"
+		},
+		"4": {
+			"pAttrNameId": "4",
+			"pAttrName": "里料"
+		},
+		"5": {
+			"pAttrNameId": "5",
+			"pAttrName": "工艺"
+		},
+		"6": {
+			"pAttrNameId": "6",
+			"pAttrName": "领型"
+		},
+		"7": {
+			"pAttrNameId": "7",
+			"pAttrName": "袖型"
+		},
+		"8": {
+			"pAttrNameId": "8",
+			"pAttrName": "版型"
+		}
+	},
+	
+	"attrValueMapper": {
+		"1": [
+			{
+				"pAttrValueId": "1",
+				"pAttrValue": "S"
+			},
+			{
+				"pAttrValueId": "2",
+				"pAttrValue": "M"
+			},
+			{
+				"pAttrValueId": "3",
+				"pAttrValue": "L"
+			},
+			{
+				"pAttrValueId": "4",
+				"pAttrValue": "XL"
+			},
+			{
+				"pAttrValueId": "5",
+				"pAttrValue": "XXL"
+			}
+		],
+		"2": [
+			{
+				"pAttrValueId": "6",
+				"pAttrValue": "白色"
+			},
+			{
+				"pAttrValueId": "7",
+				"pAttrValue": "黑色"
+			},
+			{
+				"pAttrValueId": "8",
+				"pAttrValue": "红色"
+			},
+			{
+				"pAttrValueId": "9",
+				"pAttrValue": "绿色"
+			},
+			{
+				"pAttrValueId": "10",
+				"pAttrValue": "蓝色"
+			},
+			{
+				"pAttrValueId": "11",
+				"pAttrValue": "粉色"
+			},
+			{
+				"pAttrValueId": "12",
+				"pAttrValue": "黄色"
+			},
+			{
+				"pAttrValueId": "13",
+				"pAttrValue": "紫色"
+			},
+			{
+				"pAttrValueId": "14",
+				"pAttrValue": "灰色"
+			},
+			{
+				"pAttrValueId": "15",
+				"pAttrValue": "花色"
+			}
+		],
+		"3": [
+			{
+				"pAttrValueId": "16",
+				"pAttrValue": "皮革"
+			},
+			{
+				"pAttrValueId": "17",
+				"pAttrValue": "涤纶"
+			},
+			{
+				"pAttrValueId": "18",
+				"pAttrValue": "化纤"
+			},
+			{
+				"pAttrValueId": "19",
+				"pAttrValue": "棉"
+			},
+			{
+				"pAttrValueId": "20",
+				"pAttrValue": "真丝"
+			},
+			{
+				"pAttrValueId": "21",
+				"pAttrValue": "塑料"
+			}
+		],
+		"4": [
+			{
+				"pAttrValueId": "22",
+				"pAttrValue": "棉"
+			},
+			{
+				"pAttrValueId": "23",
+				"pAttrValue": "化纤"
+			},
+			{
+				"pAttrValueId": "24",
+				"pAttrValue": "无"
+			}
+		],
+		"5": [
+			{
+				"pAttrValueId": "25",
+				"pAttrValue": "干洗"
+			},
+			{
+				"pAttrValueId": "26",
+				"pAttrValue": "水洗"
+			},
+			{
+				"pAttrValueId": "27",
+				"pAttrValue": "免熨烫"
+			}
+		],
+		"6": [
+			{
+				"pAttrValueId": "28",
+				"pAttrValue": "立领"
+			},
+			{
+				"pAttrValueId": "29",
+				"pAttrValue": "宽领"
+			},
+			{
+				"pAttrValueId": "30",
+				"pAttrValue": "无领"
+			},
+			{
+				"pAttrValueId": "31",
+				"pAttrValue": "标准"
+			}
+		],
+		"7": [
+			{
+				"pAttrValueId": "32",
+				"pAttrValue": "标准"
+			},
+			{
+				"pAttrValueId": "33",
+				"pAttrValue": "喇叭"
+			},
+			{
+				"pAttrValueId": "34",
+				"pAttrValue": "紧袖"
+			}
+		],
+		"8": [
+			{
+				"pAttrValueId": "35",
+				"pAttrValue": "瘦版"
+			},
+			{
+				"pAttrValueId": "36",
+				"pAttrValue": "欧美"
+			},
+			{
+				"pAttrValueId": "37",
+				"pAttrValue": "日韩"
+			}
+		]
+	}
+}

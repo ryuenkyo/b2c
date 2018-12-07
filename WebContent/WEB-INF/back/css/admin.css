@@ -1,0 +1,91 @@
+html {
+    font-size : 20px;
+}
+@media only screen and (min-width: 401px){
+    html {
+        font-size: 25px !important;
+    }
+}
+@media only screen and (min-width: 428px){
+    html {
+        font-size: 26.75px !important;
+    }
+}
+@media only screen and (min-width: 481px){
+    html {
+        font-size: 30px !important; 
+    }
+}
+@media only screen and (min-width: 569px){
+    html {
+        font-size: 35px !important; 
+    }
+}
+@media only screen and (min-width: 641px){
+    html {
+        font-size: 40px !important; 
+    }
+}
+
+.a-checkbox label {
+	vertical-align: top;
+	height: 34px;
+	line-height: 34px;
+	margin: 0 !important;
+	float: none !important;
+	width: auto;
+	padding: 0rem 0.05rem;
+}
+
+.a-checkbox label span {
+	vertical-align: top;
+	margin-top: 8px;
+	display: inline-block;
+	margin-left: 0.1rem;
+}
+.a-row-item {
+	display: inline-block;
+	position: relative;
+}
+
+.a-row-item label {
+	float: none !important;
+	width: auto;
+	position: relative;
+	display: inline-block;
+	margin: 0px;
+	vertical-align: top;
+}
+
+.a-row-item label span {
+	display: inline-block;
+	box-sizing: border-box;
+	margin-top: 8px;
+}
+
+.a-form-input {
+	width: 10rem !important;
+	height: 34px;
+	line-height: 34px;
+}
+
+
+
+.admin-scroll {
+	overflow-y: auto;
+}
+
+.admin-scroll::-webkit-scrollbar {/*滚动条整体样式*/
+    width: 10px;     /*高宽分别对应横竖滚动条的尺寸*/
+    height: 1px;
+}
+.admin-scroll::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+    border-radius: 10px;
+     -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background: #535353;
+}
+.admin-scroll::-webkit-scrollbar-track {/*滚动条里面轨道*/
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    background: #EDEDED;
+}

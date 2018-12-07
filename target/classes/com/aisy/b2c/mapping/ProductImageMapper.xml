@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aisy.b2c.dao.ProductImageMapper">
+  <resultMap id="BaseResultMap" type="com.aisy.b2c.pojo.ProductImage">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="image_id" jdbcType="SMALLINT" property="imageId" />
+    <result column="product_id" jdbcType="SMALLINT" property="productId" />
+    <result column="image_type" jdbcType="VARCHAR" property="imageType" />
+    <result column="image_url" jdbcType="VARCHAR" property="imageUrl" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.aisy.b2c.pojo.ProductImage">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="image_base" jdbcType="LONGVARBINARY" property="imageBase" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    image_id, product_id, image_type, image_url, cu, ct, uu, ut
+  </sql>
+  <sql id="Blob_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    image_base
+  </sql>
+</mapper>

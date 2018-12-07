@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aisy.b2c.dao.EvaluationMapper">
+  <resultMap id="BaseResultMap" type="com.aisy.b2c.pojo.Evaluation">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="evaluation_id" jdbcType="SMALLINT" property="evaluationId" />
+    <result column="client_id" jdbcType="SMALLINT" property="clientId" />
+    <result column="sku_id" jdbcType="SMALLINT" property="skuId" />
+    <result column="product_id" jdbcType="SMALLINT" property="productId" />
+    <result column="evaluation_content" jdbcType="VARCHAR" property="evaluationContent" />
+    <result column="assess_type" jdbcType="VARCHAR" property="assessType" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    evaluation_id, client_id, sku_id, product_id, evaluation_content, assess_type, ct
+  </sql>
+  
+  <select id="selectEvaluationCountSql" parameterType="Map" resultType="java.lang.Integer">
+  	SELECT
+  		count(*)
+	FROM evaluation 
+	WHERE product_id = #{productId}
+  </select>
+  <select id="selectEvaluationSql" parameterType="Map" resultMap="BaseResultMap">
+  	SELECT
+  		*
+	FROM evaluation as ev
+	LEFT JOIN emnu as e
+	ON ev.assess_type = e.emnu_name
+	WHERE product_id = #{productId}
+	AND
+	e.emnu_type = "ASSESS_TYPE"
+	<if test="page != null and page != ''" >
+		LIMIT ${page*10}, 10
+	</if>
+	;
+  </select>
+</mapper>

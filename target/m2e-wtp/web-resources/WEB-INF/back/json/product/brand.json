@@ -1,0 +1,23 @@
+[
+	{
+		"brandId": "",
+		"brandName": "请选择品牌",
+		"selected": true
+	},
+	{
+		"brandId": "1",
+		"brandName": "七匹狼"
+	},
+	{
+		"brandId": "2",
+		"brandName": "耐克"
+	},
+	{
+		"brandId": "3",
+		"brandName": "阿迪达斯"
+	},
+	{
+		"brandId": "4",
+		"brandName": "安踏"
+	}
+]

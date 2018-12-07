@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aisy.b2c.dao.EmnuMapper">
+  <resultMap id="BaseResultMap" type="com.aisy.b2c.pojo.Emnu">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="emnu_id" jdbcType="SMALLINT" property="emnuId" />
+    <id column="emnu_type" jdbcType="VARCHAR" property="emnuType" />
+    <id column="emnu_name" jdbcType="VARCHAR" property="emnuName" />
+    <result column="emnu_value" jdbcType="VARCHAR" property="emnuValue" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    emnu_id, emnu_type, emnu_name, emnu_value, cu, ct, uu, ut
+  </sql>
+</mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aisy.b2c.dao.PointManagementMapper">
+  <resultMap id="BaseResultMap" type="com.aisy.b2c.pojo.PointManagement">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="pm_id" jdbcType="SMALLINT" property="pmId" />
+    <result column="is_available" jdbcType="BIT" property="isAvailable" />
+    <result column="point_type" jdbcType="VARCHAR" property="pointType" />
+    <result column="point_reason" jdbcType="VARCHAR" property="pointReason" />
+    <result column="point" jdbcType="INTEGER" property="point" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    pm_id, is_available, point_type, point_reason, point, cu, ct, uu, ut
+  </sql>
+</mapper>

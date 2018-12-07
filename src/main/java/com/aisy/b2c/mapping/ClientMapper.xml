@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aisy.b2c.dao.ClientMapper">
+  <resultMap id="BaseResultMap" type="com.aisy.b2c.pojo.Client">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="client_id" jdbcType="SMALLINT" property="clientId" />
+    <result column="client_name" jdbcType="VARCHAR" property="clientName" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="age" jdbcType="SMALLINT" property="age" />
+    <result column="telphone" jdbcType="VARCHAR" property="telphone" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    client_id, client_name, nick_name, age, telphone, password, cu, ct, uu, ut
+  </sql>
+  
+  <sql id="selectCountStart">
+  	COUNT(
+  </sql>
+  <sql id="selectCountEnd">
+  	)
+  </sql>
+  <sql id="selectClientSql">
+ 	SELECT 
+		client_id,
+		client_name as clientName,
+		nick_name as nickName,
+		status as status,
+		e.emnu_value as statusName,
+		age,
+		telphone,
+		c.cu,
+		c.ct,
+		c.uu,
+		c.ut
+  </sql>		       
+  <select id="selectCountClientInfo" parameterType="Map" resultType="java.lang.Integer">
+  	SELECT
+  	<include refid="selectCountStart"></include>*<include refid="selectCountEnd"></include>
+  	 FROM client
+	 WHERE 1 = 1
+	 <if test="client != null and client != ''">
+		AND CONCAT(`client_name`, `nick_name`) LIKE CONCAT('%',#{client},'%')
+	 </if>
+  </select>
+  <select id="selectClientInfo" parameterType="Map" resultMap="BaseResultMap">
+  <include refid="selectClientSql"></include>
+	FROM client as c
+	left join emnu as e
+	on e.emnu_name = c.status
+	WHERE 1 = 1
+	<if test="client != null and client != ''">
+		AND CONCAT(`client_name`, `nick_name`) LIKE CONCAT('%',#{client},'%')
+	</if>
+	<if test="sortBy != null and sortBy != '' and direction != null and direction != ''" >
+		ORDER BY ${sortBy} ${direction}
+	</if>
+	<if test="page != null and limit != null" >
+		LIMIT #{page}, #{limit}
+	</if>
+	;
+  </select>
+</mapper>

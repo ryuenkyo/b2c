@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aisy.b2c.dao.RcDistrictMapper">
+  <resultMap id="BaseResultMap" type="com.aisy.b2c.pojo.RcDistrict">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="district_id" jdbcType="SMALLINT" property="districtId" />
+    <result column="pid" jdbcType="SMALLINT" property="pid" />
+    <result column="district" jdbcType="VARCHAR" property="district" />
+    <result column="level" jdbcType="BIT" property="level" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    district_id, pid, district, level
+  </sql>
+</mapper>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aisy.b2c.dao.ClientReferralMapper">
+  <resultMap id="BaseResultMap" type="com.aisy.b2c.pojo.ClientReferral">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="referral_code" jdbcType="VARCHAR" property="referralCode" />
+    <id column="client_id" jdbcType="SMALLINT" property="clientId" />
+    <result column="is_available" jdbcType="BIT" property="isAvailable" />
+    <result column="used_client_id" jdbcType="SMALLINT" property="usedClientId" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    referral_code, client_id, is_available, used_client_id, ct
+  </sql>
+  
+  <resultMap id="baseResultWithClient" type="com.aisy.b2c.pojo.VClientReferral">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="referral_code" jdbcType="VARCHAR" property="referralCode" />
+    <id column="client_id" jdbcType="SMALLINT" property="clientId" />
+    <result column="is_available" jdbcType="BIT" property="isAvailable" />
+    <result column="used_client_id" jdbcType="SMALLINT" property="usedClientId" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="client_name" jdbcType="VARCHAR" property="clientName" />
+    <result column="used_name" jdbcType="VARCHAR" property="usedName" />
+    
+  </resultMap>
+  
+  <sql id="selectCountStart">
+  	COUNT(
+  </sql>
+  <sql id="selectCountEnd">
+  	)
+  </sql>
+  <sql id="selectClientReferralSql">
+ 	SELECT 
+		cr.client_id,
+		c.client_name AS clientName,
+		cr.referral_code AS referralCode,
+		cr.used_client_id AS usedClientId,
+		is_available
+		
+		
+		
+		
+  </sql>	
+  
+  <select id="selectCountClientReferralInfo" parameterType="Map" resultType="java.lang.Integer">
+  	SELECT
+  	<include refid="selectCountStart"></include>*<include refid="selectCountEnd"></include>
+  	 FROM client_referral AS cr
+		LEFT JOIN client AS c
+		ON c.client_id = cr.client_id
+		LEFT JOIN client AS c2
+		ON c2.client_id = cr.used_client_id
+		WHERE 1 = 1
+	<if test="clientName != null and clientName != ''">
+		AND c.client_name LIKE CONCAT('%',#{clientName},'%')
+	</if>
+  </select>
+  <select id="selectClientReferralInfo" parameterType="Map" resultMap="baseResultWithClient">
+  <include refid="selectClientReferralSql"></include>
+	FROM client_referral AS cr
+	LEFT JOIN client AS c
+	ON c.client_id = cr.used_client_id
+	WHERE 1 = 1
+	<if test="clientName != null and clientName != ''">
+		AND c.client_name LIKE CONCAT('%',#{clientName},'%')
+	</if>
+	<if test="sortBy != null and sortBy != '' and direction != null and direction != ''" >
+		ORDER BY ${sortBy} ${direction}
+	</if>
+	<if test="page != null and limit != null" >
+		LIMIT #{page}, #{limit}
+	</if>
+	;
+  </select>
+  
+  
+  <select id="selectCountClientReferralDetailInfo" parameterType="Map" resultType="java.lang.Integer">
+  	SELECT
+  	<include refid="selectCountStart"></include>*<include refid="selectCountEnd"></include>
+	  	FROM client_referral AS cr
+		LEFT JOIN client AS c
+		ON c.client_id = cr.client_id
+		WHERE 1 = 1
+	 <if test="clientId != null and clientId != ''" >
+	 	AND cr.client_id = #{clientId}
+	</if>
+ 	;
+  </select>
+  
+  <select id="selectClientReferralDetailInfo" parameterType="Map" resultMap="baseResultWithClient">
+ 	SELECT
+ 		cr.client_id,
+		c.client_name AS clientName,
+		cr.referral_code AS referralCode,
+		cr.ct AS ct
+		
+		FROM client_referral AS cr
+		LEFT JOIN client AS c
+		ON c.client_id = cr.client_id
+		WHERE 1 = 1
+	<if test="clientId != null and clientId != ''" >
+	 	AND cr.client_id = #{clientId}
+	</if>
+	<if test="sortBy != null and sortBy != '' and direction != null and direction != ''" >
+		ORDER BY ${sortBy} ${direction}
+	</if>
+	<if test="page != null and limit != null" >
+		LIMIT #{page}, #{limit}
+	</if>
+	;
+  </select>	       
+  <select id="selectClinetReferralSql" parameterType="Map" resultMap="BaseResultMap">
+  	SELECT
+  		*
+	FROM client_referral 
+	WHERE client_id = ${clientId}
+	<if test="limit != null and limit != ''" >
+		LIMIT 0, ${limit}
+	</if>
+	;
+  </select>
+  <select id="selectCountClinetReferralSql" parameterType="Map" resultType="java.lang.Integer">
+  	SELECT
+  		count(*)
+	FROM client_referral 
+	WHERE client_id = ${clientId}
+  </select>
+</mapper>

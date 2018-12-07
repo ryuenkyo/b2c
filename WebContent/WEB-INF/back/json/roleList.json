@@ -1,0 +1,40 @@
+{
+	"records": [
+		{
+			"roleId": 1,
+			"roleName": "超级管理员",
+			"roleDes": "具有全面的管理",
+			"cuName": "caily",
+			"ct": "2018-03-20 13:00:50"
+		},
+		{
+			"roleId": 2,
+			"roleName": "管理员",
+			"roleDes": "创建修改用户",
+			"cuName": "zhang",
+			"ct": "2018-03-20 14:00:50"
+		},
+		{
+			"roleId": 3,
+			"roleName": "订单管理员",
+			"roleDes": "具有订单的管理",
+			"cuName": "cailsssy",
+			"ct": "2018-03-25 13:00:50"
+		},
+		{
+			"roleId": 4,
+			"roleName": "商品管理员",
+			"roleDes": "具有商品维护的权限",
+			"cuName": "caily",
+			"ct": "2018-03-27 13:00:50"
+		},
+		{
+			"roleId": 5,
+			"roleName": "会员管理员",
+			"roleDes": "具有会员维护的权限",
+			"cuName": "caily",
+			"ct": "2018-03-20 18:00:50"
+		}
+	],
+	"total": 10
+}

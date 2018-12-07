@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aisy.b2c.dao.SUserRoleMapper">
+  <resultMap id="BaseResultMap" type="com.aisy.b2c.pojo.SUserRole">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="user_id" jdbcType="SMALLINT" property="userId" />
+    <id column="role_id" jdbcType="SMALLINT" property="roleId" />
+    <result column="cu" jdbcType="SMALLINT" property="cu" />
+    <result column="ct" jdbcType="TIMESTAMP" property="ct" />
+    <result column="uu" jdbcType="SMALLINT" property="uu" />
+    <result column="ut" jdbcType="TIMESTAMP" property="ut" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    user_id, role_id, cu, ct, uu, ut
+  </sql>
+</mapper>
